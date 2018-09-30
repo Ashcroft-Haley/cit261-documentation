@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Conditional Statements</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="Conditional Statements">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <p>Display "Good day!" if the hour is less than 18:00:</p>
+            <p id="demo"></p>
+        </main>
+                
+        <script>
+            if (new Date().getHours() < 18) {
+                document.getElementById("demo").innerHTML = "Good day!";
+            } else if (new Date().getHours() > 18){
+                document.getElementById("demo").innerHTML = "Good evening!";
+            }
+        </script>
+    </body>
+
+</html>

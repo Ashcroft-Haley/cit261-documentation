@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Arrays</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="Arrays">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <p>Here is a list of pizza toppings created by an array:</p>
+            <p id="demo"></p><br>
+            <p>The first item in the array is:</p>
+            <p id="demo2"></p><br>
+            <p>The second item in the array is:</p>
+            <p id="demo3"></p><br>
+            <p>Here is the new array with a topping added to it:</p>
+            <p id="demo4"></p><br>
+            
+            <p>Check the console for other information related to arrays.</p>
+            <p id="demo3"></p><br>
+        </main>
+                
+        <script>
+            //arrays are high-level, list-like objects
+            //create the array, or list
+            //arrays use numbers to access its "elements", but because 
+            //var person = ["John", "Doe", 46];
+            
+            var pizzaToppings = ['Pepperoni', ' Olives', ' Mushrooms', ' Pineapple'];
+            //display array on browser
+            document.getElementById("demo").innerHTML = pizzaToppings;
+            
+            //How long, or how many items are in the list?
+            console.log(pizzaToppings.length);
+            //4 
+            
+            
+            //display the first array item, always an index of zero
+            var first = pizzaToppings[0];
+            //Pepperoni
+            document.getElementById("demo2").innerHTML = first;
+            
+            
+            //display the last array item
+            var last = pizzaToppings[pizzaToppings.length - 1];
+            //Pineapple
+            document.getElementById("demo3").innerHTML = last;
+            
+            
+            //loop through array and list item name and respective index
+            pizzaToppings.forEach(function(item, index, array) {
+                console.log(item, index);
+            })
+            
+            
+            
+            //Adding and removing from arrays
+            var newLength = pizzaToppings.push(' Ham');
+            document.getElementById("demo4").innerHTML = pizzaToppings;
+            
+            
+            
+            
+            
+        </script>
+    </body>
+
+</html>

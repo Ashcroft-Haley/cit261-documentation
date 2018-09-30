@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Loops</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="A simple loop: ">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <form name="selectForm">
+              <p>
+                <label for="toppingTypes">1.) For Loop Demonstration:<br> Choose some of your favorite pizza toppings, then click the button below:</label>
+                <select id="toppingTypes" name="toppingTypes" multiple="multiple">
+                  <option selected="selected">Bacon</option>
+                  <option>Pepporoni</option>
+                  <option>Olives</option>
+                  <option>Mushrooms</option>
+                  <option>Cheese</option>
+                  <option>Pineapple</option>
+                </select>
+              </p>
+              <p><input id="btn" type="button" value="How many are selected?" /></p>
+            </form>
+            
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            //***************FOR LOOPS********************************************//
+            
+            // for ([initialExpression]; [condition]; [increment expression]) statement
+            // initial expression: initializes one or more loops
+            // condition: if the value is true, loops executes. If false, loop stops. Ommited, then assumed to be true
+            // statement executes
+            //repeat
+            
+            
+                function howMany(selectObject) {
+                  var numberSelected = 0;
+                  // the variable i is initialized to zero
+                  for (var i = 0; i < selectObject.options.length; i++) {
+                    if (selectObject.options[i].selected) {
+                      numberSelected++;
+                    }
+                  }
+                  return numberSelected;
+                }
+
+                var btn = document.getElementById('btn');
+                btn.addEventListener('click', function() {
+                  alert('Number of toppings selected: ' + howMany(document.selectForm.toppingTypes));
+                });
+        </script>
+    </body>
+
+</html>
