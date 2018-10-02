@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Object Creation Functions</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="object creation functions">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            //***********************JAVASCRIPT PROTOTYPES****************************
+            
+            // Objects in Javascript have an internal property called [[Prototype]]. It cannot be accessed directly in code, as shown by the double brackets. See the following:
+            
+                    let x = {};
+            
+            //      Objects can also be created using the object constructor:
+            //      let x = new Object();
+            //      Get the prototypw of the object:
+            
+                    Object.getPrototypeOf(x);
+            
+            //      Output:
+                    {constructor: f, __defineGetter__: f, __defineSetter__: f, ...}
+            
+            //      These are the built in properties and methods
+            //      The __proto__ property exposes the internal [[Prototype]] of an object as well.
+            
+                    x.__proto__;
+            //      Output is the same
+                     
+            
+            
+            //*************************PROTOTYPE INHERITANCE***************************
+            
+            // When you attempt to access a property or method of an object, Javascript searches the object itself first and then moves onto the object's [[Prototype]] if it isn't found.
+            // If it still isn't found, it will search the prototype of the linked object until the end of the protoype chain is reached.
+            // At the end of the prototype chain is Object.prototype. All objects inherit the properties and methods of Object. 
+            // Any attempt to search beyond the the end of the chain results in null.
+            
+            
+            // In the example above, x is an empty object, but it inherits from Object. It can use any of the properties or methods that Object has. 
+            
+                    x.toString();
+            //      Output:
+                    [object Object]
+            
+            // This prototype chain is only one link long and looks like this: 
+            //      x -> Object
+            // If we try to attach two [[Prototype]] properties together, the output is null.
+                    x.__proto__.__proto__
+            //      Output:
+                    null
+            
+            
+            // Arrays are another type of object with built in properties such as pop() and push(). The reason you can use them in an array that you create is because these methods and properties are inherited from the array's prototype, Array.prototype.
+            // Take a look at the example:
+            
+                    let y = [];
+            //      You can also create an array like this:
+            //      let y = new Array();
+                    y.__proto__;
+            //      *** Output:
+                    [constructor: f, concat: f, pop: f, push: f, ...]
+            
+            // Notice the constructor property on the prototype that is set to Array(). This property returns the constructor function of an object. This constructs objects from functions. 
+            // Two prototypes can be chained together now since the prototype chain is longer in this case than it was with the x object. 
+            // It looks like this:
+            //      y -> Array -> Object
+            
+                    y.__proto__.__proto__;
+            //      Output:
+                    {constructor: f, __defineGetter__: f, __defineSetter__: f, ...}
+            
+            // This chain is now referring to Object.prototype. Here's how to check that this is true:
+                    y.__proto__ === Array.prototype;
+            //      true
+                    y.__proto__.__proto__ === Object.prototype;
+            //      true
+            
+        
+            
+            //************************CONSTRUCTOR FUNCTIONS****************************
+                     
+            //Constructor functions are used to construct new objects. The "new" operator isused to create new instances based off of a constructor function. 
+            // A fantastic analogy for this is a role-playing game. 
+            // The user can select which character they want to be, and then they can pick whether or not they want to be a healer, warrior, theif, and so on. 
+            // Each character shares many of the same basic characteristics , such as a name, level, and points, so it makes sense to create a constructor as a template. 
+            // However, since every character class may have vastly different abilities, we want to make sure each character only has access to their own abilities. 
+                     
+                     function Hero(name, level) {
+                         this.name = name;
+                         this.level = level;
+                     }
+                     
+            // every character will have a name and level, so it makes sense to create a constructor function using these two parameters. 
+            // The "this" keyword refers to the new instance created. Setting this.name to the name parameter ensures the new object will have a name property set. 
+            // New we create a new instance with "new".
+                     
+                     let hero1 = new Hero('Bjorn', 1);
+                     
+            // A new object has been created with new properties set as expected. Using the console, this is the output we see:
+                     
+            //      Output:
+                    Hero {name: "Bjorn, level: 1"}
+                     
+            // If we get the [[Prototype]] of hero1, the constructor is Hero().
+                     
+                    Object.getPrototypeOf(hero1);
+            //      Output:
+                    constructor: f Hero(name, level)
+                     
+            // So far, there are only properties added to the constructor. 
+            // Methods are commonly defined on the prototype for increased efficiency and code readability. 
+            // Let's add a method to Hero using protoype. 
+                     
+            //      Add a greet method to the hero prototype
+                    Hero.prototype.greet = function () {
+                        return '${this.name} says hello.';
+                    }
+            // Since greet() is in the prototype of Hero, and hero1 is an instance of Hero, the method is available to hero1.
+                    
+                    hero1.greet();
+            //      Output:
+                    "Bjorn says hello."
+                     
+                     
+                     
+                     
+        </script>
+    </body>
+
+</html>
