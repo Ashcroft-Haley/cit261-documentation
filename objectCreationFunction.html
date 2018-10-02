@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Object Creation Functions</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="object creation functions">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            // Here is what the object creation function looks like:
+            
+            // object.create(proto[, propertiesObject])
+            
+            //*******************PROPERTIES***************************//
+            // Proto is the object which should be the prototype of the newly created object.
+            // propertiesObject is optional. They or it specifies property descriptors to be added to the newly created object with the corresponding property names.
+            // These properties correspond to the second argument of Object.defineProperties().
+            
+            // This method can be very useful because it allows you to choose the prototype object for the object you want to create without having to define a constructor function.
+            
+            //******************RETURN VALUE**************************//
+            // A new object with the specified prototype object and properties
+            
+            // Here is a simple example of the Object.create method:
+            
+            
+            
+            // Animal properties and method encapsulation
+            
+            // var Animal = {
+            //      type: 'Invertebrates', // Default value of properties
+            //      displayType: function() {  // Method which will display type of Animal
+            //      console.log(this.type);
+            //      }
+            //  };
+
+            // Create new animal type called animal1 
+            
+            // var animal1 = Object.create(Animal);
+            // animal1.displayType(); // Output:Invertebrates
+            
+
+            // Create new animal type called Fishes
+            
+            // var fish = Object.create(Animal);
+            // fish.type = 'Fishes';
+            // fish.displayType(); // Output:Fishes
+        
+            
+            
+        </script>
+    </body>
+
+</html>
