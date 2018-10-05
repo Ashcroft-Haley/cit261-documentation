@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Objects</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="object related notes and code">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            //********************INSTANTIATION PATTERNS***********************//
+            //Instantiation is a way of creating something in Javascript.
+            // In all of these ways, an object is created as well as methods and properties for that object
+            // There are four ways to instantiate in JavaScript.
+            // They are Functional, Functional-shared, Prototypal, and Pseudoclassical
+            
+            
+            //********************Functional*********************************//
+            // Functional Instantiation is where you create a function first and then inside of it you add an empty object. 
+            // You can then add properties and methods into the object and then return the object.
+            // See the demonstration below:
+            
+            var ItalianFood = function(size, type) {
+                var obj = {};
+                
+                obj.size = size;
+                obj.type = type;
+                
+                obj.buy = function() {
+                    //code here
+                }
+                
+                obj.cook = function() {
+                    //code here
+                }
+                
+                obj.eat = function() {
+                    //code here
+                }
+                
+                return obj;
+                
+            }
+            
+            //implementation of functional instantiation
+            var cheesePizza = ItalianFood('large', 'pizza');
+            cheesePizza.eat();
+            cheesePizza.cook();
+            
+            // PROS----------------------------------------
+            // Easy to understand
+            // Properties are private because they are contained within the closure scope
+            
+            // CONS----------------------------------------
+            // All methods are contained within function, so second instances of the object means the properties and methods are duplicated in memory.
+            // If you create a new object and change its methods and create a new instance, the two objects will be referencing different methods.
+            // The methods have to be the same for every instance of the object.
+            // If you need different methods for the object instance, you can't use that object you created. 
+            
+            
+            
+            
+            //*******************Functional-Shared*************************//
+            // Instead of duplicating methods in memory every time you create a new object, this type of instantiation makes methods shared among all objects. This overcomes the limitation.
+            // See the demonstration below:
+            
+            var ItalianFood = function(size, type) {
+                var obj = {}
+                
+                obj.size = size;
+                obj.type = type;
+                
+                extend(obj, objMethods);
+                
+                return obj;  
+            }
+            
+            var extend = function(obj, methods) {
+                for (var key in methods) {
+                    obj[key] = methods[key]
+                }  
+            }
+            
+            var objMethods = {
+                cook: function() {
+                    //code here
+                },
+                
+                eat: function() {
+                //code here
+                },
+                
+                buy: function() {
+                //code here
+                }
+            }
+            
+            //implementation of functional shared instantiation
+            var cheesePizza = ItalianFood('large', 'pizza');
+            cheesePizza.eat();
+            cheesePizza.cook();
+            
+            // PROS-----------------------------------------
+            // Removes duplication methods
+            // ...Which improves memory mangement
+            
+            // CONS-----------------------------------------
+            // If you modify the methods and then create new objects, the original object and the new object will refer to different methods
+            
+            
+            
+            
+            //*******************Prototypal*********************************//
+            // This type of instantiation utilizes the prototype chain.
+            // Methods are attached to the object's prototype using the Object.create method.
+            // Create all the methods on a separate object.
+            // Create a function.
+            // Within the function, use the Object.create method to attach the methods. 
+            // Define any properties you need to in the function as well.
+            // Return the object.
+            // See the demonstration below:
+            
+            var ItalianFood = function(size, type) {
+                var obj = Object.create(objMethods);
+                
+                obj.size = size;
+                obj.type = type;
+                
+                return obj;
+            }
+            
+            var objMethods = {
+                buy: function() {
+                    //code here
+                },
+                
+                eat: function() {
+                //code here
+                },
+                
+                cook: function() {
+                    //code here
+                }
+            }
+            
+            //Implementation of the prototypal instantiation
+            var cheesePizza = ItalianFood('large', 'pizza');
+            cheesePizza.eat();
+            cheesePizza.buy();
+            
+            // PROS-----------------------------------------
+            // Every method is available to every object created without duplicating methods in memory
+            // CONS-----------------------------------------
+            // To use this method, you have to create an object, decorate it, and then return it from the constructor function.
+            
+            
+            
+            
+            //*******************Pseudoclassical***************************//
+            // This instantiation type tries to overcome the amount of typing required to create an object using prototypal instantiation. 
+            // Like prototypal, pseudoclassical instantiation uses the prototype chain.
+            // Utilize the keyword new, which Javascript provides for functionality.
+            // Instead of creating a new variable and assigning Object.create() to it, assign it to "this". 
+            // Create a new function and create its properties using the "this" keyword.
+            // Methods are assigned to the prototype.
+            // To create a new prototype, use the keyword "new". 
+            // See the demonstration below:
+            
+            var ItalianFood = function(size, type) {
+                
+                this.size = size;
+                this.name = name;
+                
+            }
+            
+            ItalianFood.prototype.eat = function() {
+                //code here
+            },
+            
+            ItalianFood.prototype.buy = function() {
+                //code here
+            },
+            
+            ItalianFood.prototype.cook = function() {
+                //code here
+            }
+            
+            //implementation of pseudoclassical instantiation
+            var cheesePizza = new ItalianFood('large', 'pizza');
+            cheesePizza.eat();
+            cheesePizza.cook();
+            
+            
+            
+            
+        
+            
+            
+        </script>
+    </body>
+
+</html>
