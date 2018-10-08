@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Examples of code</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="examples of code related to JSON">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <h2>Working With JSON and Javascript</h2>
+            
+            <h3>Converting JSON Into Javascript</h3>
+            <p>The following list of people started out in JSON:</p>
+            <p id="demo-01"></p><br>
+            
+            <h3>Converting Javascript Into JSON</h3>
+            <p>You can see that the object has been converted into a string of text.</p>
+            <p id="demo-02"></p>
+            
+        </main>
+        
+        
+        <script>
+            //Converting to Javascript
+            var myJSON = '{"employees":[' + 
+                '{"firstName":"John", "lastName":"Doe" },' +
+                '{"firstName":"Anna", "lastName":"Smith" },' +
+                '{"firstName":"Peter", "lastName":"Jones" }]}';
+            
+            obj = JSON.parse(myJSON);
+            document.getElementById("demo-01").innerHTML = 
+                obj.employees[0].firstName 
+                + " " + obj.employees[0].lastName
+                + ", " + obj.employees[1].firstName 
+                + " " + obj.employees[1].lastName
+                + ", and " + obj.employees[2].firstName 
+                + " " + obj.employees[2].lastName;
+            
+            
+            
+            
+            
+            //Converting to JSON
+            var myObj, myJSON, text, obj;
+            //Storing data:
+            myObj = { name: "John", age: 31, city: "New York" };
+            mySecondJSON = JSON.stringify(myObj);
+            //Retrieving data:
+            text = localStorage.getItem("testJSON");
+            obj = JSON.parse(text);
+            document.getElementById("demo-02").innerHTML = mySecondJSON;
+            
+            
+            
+            
+            
+            
+        </script>
+    </body>
+
+</html>
