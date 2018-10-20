@@ -1,1 +1,59 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>ObjectCreation and Inheritance</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="object creation, prototypes, and inheritance">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <p>Check out the console for this example.</p>
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            
+            //SuperType constructor function
+            function SuperType(firstName, lastName){
+                this.firstName = "Haley",
+                this.lastName = "Ashcroft"
+            }
 
+            //SuperType prototype
+            SuperType.prototype.getSuperName = function(){
+                return this.firstName + " " + this.lastName;
+            }
+
+            //SubType prototype function
+            function SubType(firstName, lastName, age){
+                //Inherit instance properties
+                SuperType.call(this, firstName, lastName);
+                this.age = age;
+            }
+
+            SubType.prototype = Object.create(SuperType.prototype)
+
+            //Create SubType objects
+            var subTypeObj1= new SubType("Haley", "Ashcroft", 21);
+
+            //subTypeObj1
+            console.log(subTypeObj1.firstName); //Output: Haley
+            console.log(subTypeObj1.age); //Output: 21
+            console.log(subTypeObj1.getSuperName()); //Output: Haley Ashcroft
+            console.log(subTypeObj1.getSubAge()); //Output: 21
+
+            console.log(subTypeObj1 instance SubType) // Output: true
+            console.log(subTypeObj1 instance SuperType) // Output: true
+            
+            
+        </script>
+    </body>
+
+</html>
