@@ -1,1 +1,131 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Loops</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="A simple loop: ">
+          <!-- external style references in the proper cascading order -->   
+    </head>
+    
+    <body>
+        <main>
+            <form name="selectForm">
+              <p>
+                <label for="toppingTypes">1.) For Loop Demonstration:<br> Choose some of your favorite pizza toppings, then click the button below:</label>
+                <select id="toppingTypes" name="toppingTypes" multiple="multiple">
+                  <option selected="selected">Bacon</option>
+                  <option>Pepporoni</option>
+                  <option>Olives</option>
+                  <option>Mushrooms</option>
+                  <option>Cheese</option>
+                  <option>Pineapple</option>
+                </select>
+              </p>
+              <p><input id="btn" type="button" value="How many are selected?" /></p>
+            </form><br>
+            
+            <h2>Arrays</h2>
+            <div class="example-02">
+                <p>Here is a list of pizza toppings created by an array:</p>
+                <p id="demo"></p><br>
+                <p>The first item in the array is:</p>
+                <p id="demo2"></p><br>
+                <p>The second item in the array is:</p>
+                <p id="demo3"></p><br>
+                <p>Here is the new array with a topping added to it:</p>
+                <p id="demo4"></p><br>
 
+                <p>Check the console for other information related to arrays.</p>
+            </div><br>
+            
+            <h2>Conditional statements</h2>
+            <div class="example-03">
+                <p>Display "Good day!" if the hour is less than 18:00:</p>
+                <p id="demo5"></p>
+            </div>
+            
+        </main>
+        
+        <footer>
+        </footer>
+        
+        <script>
+            //***************FOR LOOPS********************************************//
+            
+            // for ([initialExpression]; [condition]; [increment expression]) statement
+            // initial expression: initializes one or more loops
+            // condition: if the value is true, loops executes. If false, loop stops. Ommited, then assumed to be true
+            // statement executes
+            //repeat
+            
+            
+                function howMany(selectObject) {
+                  var numberSelected = 0;
+                  // the variable i is initialized to zero
+                  for (var i = 0; i < selectObject.options.length; i++) {
+                    if (selectObject.options[i].selected) {
+                      numberSelected++;
+                    }
+                  }
+                  return numberSelected;
+                }
+
+                var btn = document.getElementById('btn');
+                btn.addEventListener('click', function() {
+                  alert('Number of toppings selected: ' + howMany(document.selectForm.toppingTypes));
+                });
+            
+            //**************ARRAYS***********************************************//
+            //arrays are high-level, list-like objects
+            //create the array, or list
+            //arrays use numbers to access its "elements", but because 
+            //var person = ["John", "Doe", 46];
+            
+            var pizzaToppings = ['Pepperoni', ' Olives', ' Mushrooms', ' Pineapple'];
+            //display array on browser
+            document.getElementById("demo").innerHTML = pizzaToppings;
+            
+            //How long, or how many items are in the list?
+            console.log(pizzaToppings.length);
+            //4 
+            
+            
+            //display the first array item, always an index of zero
+            var first = pizzaToppings[0];
+            //Pepperoni
+            document.getElementById("demo2").innerHTML = first;
+            
+            
+            //display the last array item
+            var last = pizzaToppings[pizzaToppings.length - 1];
+            //Pineapple
+            document.getElementById("demo3").innerHTML = last;
+            
+            
+            //loop through array and list item name and respective index
+            pizzaToppings.forEach(function(item, index, array) {
+                console.log(item, index);
+            })
+            
+            
+            
+            //Adding and removing from arrays
+            var newLength = pizzaToppings.push(' Ham');
+            document.getElementById("demo4").innerHTML = pizzaToppings;
+            
+            
+            
+            
+            
+            //************CONDITIONAL STATEMENTS**********************************//
+            if (new Date().getHours() < 18) {
+                document.getElementById("demo5").innerHTML = "Good day!";
+            } else if (new Date().getHours() > 18){
+                document.getElementById("demo5").innerHTML = "Good evening!";
+            }
+        </script>
+    </body>
+
+</html>
