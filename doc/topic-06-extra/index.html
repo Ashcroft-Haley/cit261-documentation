@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Learning the DOM</title>
+        
+        <style>
+            html { font-family: sans-serif; color: #333; }
+            body { max-width: 500px; margin: 0 auto; padding: 0 15px; }
+            div, article { padding: 10px; margin: 5px; border: 1px solid #dedede; }
+            div.examples { margin-bottom: 50px;}
+        </style>
+    </head>
+
+    <body>
+        <p>Check out the code for this example to understand how this example works. In the first example I access the DOM and change the style of some of the elements. In the second example I add, take away, and alter items on a to-do list by manipulating the DOM in javascript.</p>
+        <div class="examples">
+            <h1>Accessing the DOM</h1>
+            <h2>ID (#demo)</h2>
+            <div id="demo">Access me by ID</div>
+
+            <h2>Class (.demo)</h2>
+            <div class="demo">Access me by class (1)</div>
+            <div class="demo">Access me by class (2)</div>
+
+            <h2>Tag (article)</h2>
+            <article>Access me by tag (1)</article>
+            <article>Access me by tag (2)</article>
+
+            <h2>Query Selector</h2>
+            <div id="demo-query">Access me by query</div>
+
+            <h2>Query Selector All</h2>
+            <div class="demo-query-all">Access me by query all (1)</div>
+            <div class="demo-query-all">Access me by query all (2)</div>
+        </div>
+        
+
+      
+        <div class="examples">
+            <h1>Manipulating the DOM</h1>
+            <h2>My To-Do List</h2>
+            <ul>
+                <li>Buy groceries</li>
+                <li>Feed the cat</li>
+                <li>Do laundry</li>
+            </ul>
+
+        </div>
+      
+    </body>
+    
+    
+    
+    <script>
+        //*****************Accessing the DOM*******************************
+        //document is the root of every node in the DOM
+        var demoId = document.getElementById("demo");
+        demoId.style.border = '1px solid purple';
+        
+        var demoClass = document.getElementsByClassName("demo");
+        //For classes and tags, you cannot set access all of the elements
+        //within them the same way you would above. this is because you get
+        //an array of objects instead of one object. Use a for loop to access
+        //every item in the array.
+        for (i = 0; i < demoClass.length; i++) {
+            demoClass[i].style.border = '1px solid orange';
+        }
+        
+        var demoTag = document.getElementsByTagName('article');
+        for (i = 0; i < demoTag.length; i++) {
+            demoTag[i].style.border = '1px solid red';
+        }
+        
+        var demoQuerys = document.querySelectorAll('.demo-query-all');
+        demoQuerys.forEach(query => {
+           query.style.border = '1px solid yellow'; 
+        });
+        
+        
+        //**************Manipulating the DOM******************************
+        // To do list ul element
+        const todoList = document.querySelector('ul');
+        
+        // Create new to-do
+        const newTodo = document.createElement('li');
+        newTodo.textContent = 'Do Homework';
+        
+        // Now that we have a complete element for our new to-do, add it
+        // to the end of the list.
+        todoList.appendChild(newTodo);
+        
+        
+        // Create another to-do
+        const anotherTodo = document.createElement('li');
+        anotherTodo.textContent = 'Pay bills';
+        
+        // Add a new to-do to the beginning of the list.
+        // Now you need to insert the new node before the next sibling node
+        // Here's what it looks like in pseudocode:
+        // parentNode.insertBefore(newnode, nextSibling);
+        todoList.insertBefore(anotherTodo, todoList.firstElementChild);
+        
+        // Modify an existing to-do to replace a node
+        // The first step to create a new element remains the same.
+        const modifiedTodo = document.createElement('li');
+        modifiedTodo.textContent = 'Feed turtle';
+        // This also takes two lines of code.
+        // parentNode.replaceChild(newNode, oldNode);
+        todoList.replaceChild(modifiedTodo, todoList.children[2]);
+        
+        //Now, to remove a node from the DOM:
+        todoList.removeChild(todoList.lastElementChild);
+        // You can also remove a child element from the DOM by setting
+        // the innerHTML property of a parent element to an empty string("").
+        
+        
+    
+    </script>
+    
+</html>
