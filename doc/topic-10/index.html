@@ -1,1 +1,138 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Javascript Events and Animations and Transitions</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="A simple loop: ">
+          <!-- external style references in the proper cascading order --> 
+        
+          <style>
+              div {
+                  background-color: darkmagenta;
+                  height: 100px;
+                  width: 23%;
+                  float: left;
+                  margin: 5px;
+              }
+              
+              div.growclass {
+                  margin-top: 55px;
+                  width: 100px;
+                  height: 100px;
+                  background: darkmagenta;
+                  position: relative;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  transition: width 2s linear 1s;
+              }
+              
+              @-webkit-keyframes mymove {
+                  from {
+                      background-color: red;
+                  }
+                  to {
+                      background-color: yellow;
+                  }
+              }
+              
+              @keyframes mymove {
+                  from {
+                      background-color: red;
+                  }
+                  to {
+                      background-color: yellow;
+                  }
+              }
+        
+        </style>
+    </head>
+    
+    <body>
+        <h1>Create your own dance floor!</h1>
+        <p>Click on the rectnagles to see how the colors change. Double click to change the color of non-animated rectangles.</p>
+        <p>Click on the bottom row of squares to make them grow!</p>
+        
+        <script>
+            
+            for(var i = 1; i <= 8; i++) {
+                var myDiv = document.createElement('div');
+                document.body.appendChild(myDiv);
+            }
+            
+            function random(number) {
+                return Math.floor(Math.random()*number);
+            }
+            
+            function bgChange() {
+                var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+                return rndCol;
+            }
+              
+            var divs = document.querySelectorAll('div');
+            console.log(divs);
+            
+            for(var i = 0; i < divs.length; i++) {
+                divs[i].onclick = function(e) {
+                e.target.style.backgroundColor = bgChange();
+                e.target.style.boxShadow = 'inset 0 0 10px #000000';
+                }
+            }
+            
+            
+            
+            
+            for(var i = 1; i <= 8; i++) {
+                var myOtherDivs = document.createElement('div');
+                document.body.appendChild(myOtherDivs);
+            }
+            
+            function bgAnimation() {
+                var animate = 'mymove 4s infinite';
+                return animate;
+            }
+              
+            var newDivs = document.querySelectorAll('div');
+            
+            for (var i = 8; i < newDivs.length; i++) {
+                newDivs[i].onclick = function(e) {
+                    e.target.style.animation = bgAnimation();
+                    e.target.style.WebkitAnimation = bgAnimation();
+                    e.target.style.boxShadow = 'inset 0 0 10px #000000';
 
+                }
+            }
+            
+            
+            
+            for(var i = 1; i <= 4; i++) {
+                var myGrowingDivs = document.createElement('div');
+                myGrowingDivs.setAttribute("class", "growclass");
+                document.body.appendChild(myGrowingDivs);
+            }
+            
+            function grow() {
+                var growth = '292px';
+                return growth;
+            }
+            
+            var lastDivs = document.querySelectorAll('div');
+            
+            for (var i = 16; i < lastDivs.length; i++) {
+                lastDivs[i].onclick = function(e) {
+                    e.target.style.width = grow();
+                    e.target.style.animation = bgAnimation();
+                    e.target.style.WebkitAnimation = bgAnimation();
+                }
+            }
+            
+
+            
+            
+            
+            
+        </script>
+    </body>
+
+</html>
