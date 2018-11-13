@@ -1,1 +1,351 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Javascript Triggered Transitions</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="A simple loop: ">
+          <!-- external style references in the proper cascading order --> 
+        
+          <style>
+              .parent { width: 250px; height:250px;}
+                .first-box, .second-box, .third-box, .fourth-box {
+                    width: 100px;
+                    height: 100px;
+                    background-color: red;
+                    font-size: 20px;
+                    left: 0px;
+                    top: 0px;
+                    position:absolute;
+                    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    -webkit-transition-duration: 0.5s;
+                    -webkit-transition-timing-function: ease-in-out;
+                    transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    transition-duration: 0.5s;
+                    transition-timing-function: ease-in-out;
+                }
+              
+                .box1{
+                    transform: rotate(270deg);
+                    -webkit-transform: rotate(270deg);
+                    width: 50px;
+                    height: 50px;
+                    background-color: blue;
+                    color: yellow;
+                    font-size: 18px;
+                    left: 150px;
+                    top: 25px;
+                    position: absolute;
+                    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    -webkit-transition-duration: 0.5s;
+                    -webkit-transition-timing-function: ease-in-out;
+                    transition-property: width height background-color font-size left top transform -webkit-transformv color;
+                    transition-duration: 0.5s;
+                    transition-timing-function: ease-in-out;
+                }
+                .box2{
+                    transform: rotate(270deg);
+                    -webkit-transform: rotate(270deg);
+                    width: 50px;
+                    height: 50px;
+                    background-color: blue;
+                    color: yellow;
+                    font-size: 18px;
+                    left: 150px;
+                    top: 75px;
+                    position: absolute;
+                    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    -webkit-transition-duration: 1s;
+                    -webkit-transition-timing-function: ease-in-out;
+                    transition-property: width height background-color font-size left top transform -webkit-transformv color;
+                    transition-duration: 1s;
+                    transition-timing-function: ease-in-out;
+                }
+              
+                .box3{
+                    transform: rotate(270deg);
+                    -webkit-transform: rotate(270deg);
+                    width: 50px;
+                    height: 50px;
+                    background-color: blue;
+                    color: yellow;
+                    font-size: 18px;
+                    left: 150px;
+                    top: 125px;
+                    position: absolute;
+                    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    -webkit-transition-duration: 2s;
+                    -webkit-transition-timing-function: ease-in-out;
+                    transition-property: width height background-color font-size left top transform -webkit-transformv color;
+                    transition-duration: 2s;
+                    transition-timing-function: ease-in-out;
+                }
+              
+                .box4{
+                    transform: rotate(270deg);
+                    -webkit-transform: rotate(270deg);
+                    width: 50px;
+                    height: 50px;
+                    background-color: blue;
+                    color: yellow;
+                    font-size: 18px;
+                    left: 150px;
+                    top: 175px;
+                    position: absolute;
+                    -webkit-transition-property: width height background-color font-size left top transform -webkit-transform color;
+                    -webkit-transition-duration: 4s;
+                    -webkit-transition-timing-function: ease-in-out;
+                    transition-property: width height background-color font-size left top transform -webkit-transformv color;
+                    transition-duration: 4s;
+                    transition-timing-function: ease-in-out;
+                }
+              
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .red {
+                width: 10px;
+                height: 10px;
+                position: absolute;
+                background: black;
+                border-radius: 100px;
+            }
+              
+            .blue {
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                background: blue;
+                border-radius: 200px;
+            }
+        
+            canvas#canvas {
+                  touch-action: none;
+            }
 
+              
+          </style>
+    </head>
+    
+    <body>
+        <div class="parent">
+            <div class="first-box">Trick!</div>
+            <div class="second-box">Cool</div>
+            <div class="third-box">This</div>
+            <div class="fourth-box">Watch</div>
+        </div>
+        <h2>CSS Transitions Using Javascript (ABOVE^^^)</h2>
+        
+        
+        <h2>Canvas Tag</h2>
+        <p>To use this example, use the Inspect tool and look at the browser window with a touch-screen device. Use your mouse to draw on the screen over the beating heart and create something alive!</p>
+        <canvas id="canvas" width="400" height="400">Your browser does not support canvas.</canvas>
+        
+        <h2>Audio Tag</h2>
+        <p>Click the button to listen to a BYU devotional address given by Jospeh Fielding Smith.</p>
+        <audio controls>
+            <source src="/joseph-fielding-smith-devo.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <h2>Video Tag</h2>
+        <p>Click the button to play a video about a rabbit. (Refresh the page if it doesn't load.)</p>
+        <div id="movie"></div>
+  
+        <script>
+            
+                        
+            //*************PLAY A VIDEO**********************************
+            document.getElementById('movie').addEventListener("load", createVideo());
+            function createVideo() {
+                var x = document.createElement("VIDEO");
+
+                if (x.canPlayType("video/mp4")) {
+                    x.setAttribute("src","http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+                } else {
+                    x.setAttribute("src","http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv");
+                }
+
+                x.setAttribute("width", "320");
+                x.setAttribute("height", "240");
+                x.setAttribute("controls", "controls");
+                document.body.appendChild(x);
+            }
+            
+            
+ 
+            //*************CREATE CANVAS**********************************
+            var mainCanvas = document.getElementById("canvas");
+            var mainContext = mainCanvas.getContext('2d');
+
+            var canvasWidth = mainCanvas.width;
+            var canvasHeight = mainCanvas.height;
+
+            var angle = 0;
+
+            var requestAnimationFrame = window.requestAnimationFrame || 
+                                        window.mozRequestAnimationFrame || 
+                                        window.webkitRequestAnimationFrame || 
+                                        window.msRequestAnimationFrame;
+            
+            
+            
+            //**********************DRAWING THE BEATING HEART*******************
+            function drawCircle() {
+                mainContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                // color in the background
+                mainContext.fillStyle = "white";
+                mainContext.fillRect(0, 0, canvasWidth, canvasHeight);
+
+                // draw the circle
+                mainContext.beginPath();
+
+                var radius = 25 + 55 * Math.abs(Math.cos(angle));
+                mainContext.arc(145, 180, radius, 0, Math.PI * 4, false);
+
+
+                // color in the circle
+                mainContext.fillStyle = "rgba(255, 204, 204, 0.55)";
+                mainContext.fill();
+
+                angle += Math.PI / 100; //speed
+
+                requestAnimationFrame(drawCircle);
+                
+                
+                //Draw the heart
+                mainContext.beginPath();
+                mainContext.moveTo(145, 150);
+                mainContext.bezierCurveTo(145, 147, 140, 135, 120, 135);
+                mainContext.bezierCurveTo(90, 135, 90, 172.5, 90, 172.5);
+                mainContext.bezierCurveTo(90, 190, 110, 212, 145, 230);
+                mainContext.bezierCurveTo(180, 212, 200, 190, 200, 172.5);
+                mainContext.bezierCurveTo(200, 172.5, 200, 135, 170, 135);
+                mainContext.bezierCurveTo(155, 135, 145, 147, 145, 150);
+                mainContext.fillStyle = 'red';
+                mainContext.fill();
+                
+                //Draw the text
+                mainContext.font = "12px Arial";
+                mainContext.fillText("Make something come alive!", 5, 15);
+                mainContext.fillText("Draw around the beating heart.", 5, 30);
+            }
+
+            
+            
+            drawCircle();
+    
+
+            //*****************DRAWING!*********************************
+            function testTouchesFunction(e) {
+                var touch = e.touches[0]; // Gets info on the first finger, 
+                //or the touch with the index of 0
+                var scrX = touch.pageX; // Get X position including scroll bars
+            }
+            
+            addEventListener('touchstart', testTouchesFunction, false);
+            
+            addEventListener('touchmove', function(e) {
+                //when the finger moves the function will begin
+                e.preventDefault(); // prevent scrolling
+                var touch = e.touches[0]; //Fires every time the user moves
+                var posY = touch.pageY; //Get y position
+                var posX = touch.pageX; // Get x position
+                
+                if(e.touches.length == 1) {
+                    // If one finger is touching
+                    
+                    var red = document.createElement('div');
+                    red.setAttribute('class', 'red');
+                    
+                    red.style.top = posY + 'px';
+                    red.style.left = posX + 'px';
+                    
+                    document.body.appendChild(red);
+                    
+                }
+                
+                if(e.touches.length == 2) {
+                    // If one finger is touching
+                    
+                    var blue = document.createElement('div');
+                    red.setAttribute('class', 'blue');
+                    
+                    red.style.top = posY + 'px';
+                    red.style.left = posX + 'px';
+                    
+                    document.body.appendChild(blue);
+                    
+                }    
+                    
+            }, false);
+            
+            
+            //*****************CSS TRANSITIONS TRIGGERED BY JAVASCRIPT!***************
+            function updateTransition() {
+              var el = document.querySelector("div.first-box");
+
+              if (el) {
+                el.className = "box1";
+              } else {
+                el = document.querySelector("div.box1");
+                el.className = "first-box";
+              }
+
+              return el;
+            }
+            
+            function updateSecondTransition() {
+              var el = document.querySelector("div.second-box");
+
+              if (el) {
+                el.className = "box2";
+              } else {
+                el = document.querySelector("div.box2");
+                el.className = "second-box";
+              }
+
+              return el;
+            }
+            
+            function updateThirdTransition() {
+              var el = document.querySelector("div.third-box");
+
+              if (el) {
+                el.className = "box3";
+              } else {
+                el = document.querySelector("div.box3");
+                el.className = "third-box";
+              }
+
+              return el;
+            }
+            
+            function updateFourthTransition() {
+              var el = document.querySelector("div.fourth-box");
+
+              if (el) {
+                el.className = "box4";
+              } else {
+                el = document.querySelector("div.box4");
+                el.className = "fourth-box";
+              }
+
+              return el;
+            }
+
+            var intervalID = window.setInterval(updateTransition, 7000);
+            var intervalTwoID = window.setInterval(updateSecondTransition, 7000);
+            var intervalThreeID = window.setInterval(updateThirdTransition, 7000);
+            var intervalFourID = window.setInterval(updateFourthTransition, 7000);
+
+            
+
+        </script>
+    </body>
+
+</html>
