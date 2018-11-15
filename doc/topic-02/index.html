@@ -11,7 +11,7 @@
     
     <body>
         <main>
-            <p>Check out the console for this example.</p>
+            <p>Check out the console for this example as well as the notes in the code.<br> I used object, inheritance, and prototype concepts to display values to the console.</p>
             
         </main>
         
@@ -30,6 +30,7 @@
             SuperType.prototype.getSuperName = function(){
                 return this.firstName + " " + this.lastName;
             }
+            
 
             //SubType prototype function
             function SubType(firstName, lastName, age){
@@ -42,15 +43,14 @@
 
             //Create SubType objects
             var subTypeObj1= new SubType("Haley", "Ashcroft", 21);
+            
+            
 
             //subTypeObj1
             console.log(subTypeObj1.firstName); //Output: Haley
+            console.log(subTypeObj1.lastName); //Output: Ashcroft
             console.log(subTypeObj1.age); //Output: 21
             console.log(subTypeObj1.getSuperName()); //Output: Haley Ashcroft
-            console.log(subTypeObj1.getSubAge()); //Output: 21
-
-            console.log(subTypeObj1 instance SubType) // Output: true
-            console.log(subTypeObj1 instance SuperType) // Output: true
             
             
         </script>
