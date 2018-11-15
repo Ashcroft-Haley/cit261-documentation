@@ -1,1 +1,166 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Javascript Events and Animations and Transforms</title>
+          <meta name="author" content="Haley Ashcroft">
+          <meta name="description" content="A simple loop: ">
+          <!-- external style references in the proper cascading order --> 
+        
+          <style>
+              body {
+                  margin: 10px;
+              }
+              
+              .box {
+                  width: 100px;
+                  height: 100px;
+                  background-color: gold;
+                  position: relative;
+                  -webkit-animation-name: myFirstAnimation;
+                  -webkit-animation-duration: 7s;
+                  animation-name: myFirstAnimation;
+                  animation-duration: 7s;
+                  animation-direction: alternate;
+                  
+              }
+              
+              .box1 {
+                  width: 100px;
+                  height: 100px;
+                  background-color: green;
+                  position: relative;
+                  -webkit-animation-name: mySecondAnimation;
+                  -webkit-animation-duration: 7s;
+                  animation-name: mySecondAnimation;
+                  animation-duration: 7s;
+                  animation-direction: alternate;
+              }
+              
+              
+              .second-box {
+                  width: 100px;
+                  height: 100px;
+                  background-color: gold;
+                  position: relative;
+                  -webkit-animation-name: myFirstAnimation;
+                  -webkit-animation-duration: 7s;
+                  animation-name: myFirstAnimation;
+                  animation-duration: 7s;
+                  animation-direction: alternate;
+                  -ms-transform: rotate(20deg);
+                  -webkit-transform: rotate(20deg);
+                  transform: rotate(20deg);
+                  
+              }
+              
+              .box2 {
+                  width: 100px;
+                  height: 100px;
+                  background-color: gold;
+                  position: relative;
+                  -webkit-animation-name: myFirstAnimation;
+                  -webkit-animation-duration: 7s;
+                  animation-name: mySecondAnimation;
+                  animation-duration: 7s;
+                  animation-direction: alternate;
+                  -ms-transform: rotate(50deg) skewY(20deg);
+                  -webkit-transform: rotate(50deg) skewY(20deg);
+                  transform: rotate(50deg) skewY(20deg);
+              }
+              
+              @-webkit-keyframes myFirstAnimation {
+                  from{
+                      left: 25px;
+                      top: 25px;
+                  }
+                  to {
+                      left: 200px;
+                      top: 25px;
+                  }
+              }
+              
+              @keyframes myFirstAnimation {
+                  from{
+                      left: 25px;
+                      top: 25px;
+                  }
+                  to {
+                      left: 200px;
+                      top: 25px;
+                  }
+              }
+              
+              @-webkit-keyframes mySecondAnimation {
+                  from{
+                      left: 25px;
+                      top: 25px;
+                  }
+                  to {
+                      left: 200px;
+                      top: 100px;
+                  }
+              }
+              
+              @keyframes mySecondAnimation {
+                  from{
+                      left: 200px;
+                      top: 100px;
+                  }
+                  to {
+                      left: 25px;
+                      top: 25px;
+                  }
+              }
+              
+              h2#second {
+                  margin-top: 100px;
+              }
 
+        
+        </style>
+    </head>
+    
+    <body>
+        <h2>Javascript Triggered Animation</h2>
+        <div class="box" id="div">How's it going?</div>
+        
+        <h2 id="second">Javascript Triggered Transform</h2>
+        <div class="second-box" id="div2">Hi there!</div>
+        
+        <script>
+            
+            function updateAnimation() {
+              var box = document.querySelector("div.box");
+
+              if (box) {
+                box.className = "box1";
+              } else {
+                box = document.querySelector("div.box1");
+                box.className = "box";
+              }
+
+              return box;
+            }
+            
+            function updateTransform() {
+              var box = document.querySelector("div.second-box");
+
+              if (box) {
+                box.className = "box2";
+              } else {
+                box = document.querySelector("div.box2");
+                box.className = "second-box";
+              }
+
+              return box;
+            }
+            
+            var intervalID = window.setInterval(updateAnimation, 7000);
+            var intervalID = window.setInterval(updateTransform, 7000);
+
+        </script>
+    </body>
+
+</html>
