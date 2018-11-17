@@ -12,29 +12,60 @@
 </head>
 
 <body>
-    <h2>Local Storage</h2>
-    <h4>Mouseover over the button to see the number of mouseovers counted in local storage.</h4>
-    <p><button onmouseover="hoverCounter()" type="button">Hover over me!</button></p>
-    <div id="result"></div>
-  <h2>Using an API</h2>
+    <div class="small-container">
+    <h2>New List App</h2>
+
+    <form>
+      <input id="item" type="text" placeholder="New">
+    </form>
+
+    <h2>Items</h2>
+    <ul></ul>
+
+    <button>Clear All</button>
+  </div>
+  
+    <h2>Connecting to 3rd Part API (Below...)</h2>
   <div id="root"></div>
 
   <script>
-      function hoverCounter() {
-    if(typeof(Storage) !== "undefined") {
-        if (localStorage.hovercount) {
-            localStorage.hovercount = Number(localStorage.hovercount)+1;
-        } else {
-            localStorage.hovercount = 1;
+      //*******************Local Storage**************************
+      const form = document.querySelector('form');
+        const ul = document.querySelector('ul');
+        const button = document.querySelector('button');
+        const input = document.getElementById('item');
+        let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+
+        localStorage.setItem('items', JSON.stringify(itemsArray));
+        const data = JSON.parse(localStorage.getItem('items'));
+
+        const liMaker = (text) => {
+          const li = document.createElement('li');
+          li.textContent = text;
+          ul.appendChild(li);
         }
-        document.getElementById("result").innerHTML = "You have clicked the button " + localStorage.hovercount + " time(s).";
-    } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
-    }
-}
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          itemsArray.push(input.value);
+          localStorage.setItem('items', JSON.stringify(itemsArray));
+          liMaker(input.value);
+          input.value = "";
+        });
+
+        data.forEach(item => {
+          liMaker(item);
+        });
+
+        button.addEventListener('click', function () {
+          localStorage.clear();
+          while (ul.firstChild) {
+            ul.removeChild(ul.firstChild);
+          }
+        });
       
-      
-      
+      //****************Connecting to 3rd Party API***************
       // This example takes info from an API for beginners
       // and displays it on this webpage. You are going to see
       // a list of movies created by a Japanese movie making company.
