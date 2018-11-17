@@ -12,10 +12,29 @@
 </head>
 
 <body>
-
+    <h2>Local Storage</h2>
+    <h4>Mouseover over the button to see the number of mouseovers counted in local storage.</h4>
+    <p><button onmouseover="hoverCounter()" type="button">Hover over me!</button></p>
+    <div id="result"></div>
+  <h2>Using an API</h2>
   <div id="root"></div>
 
   <script>
+      function hoverCounter() {
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.hovercount) {
+            localStorage.hovercount = Number(localStorage.hovercount)+1;
+        } else {
+            localStorage.hovercount = 1;
+        }
+        document.getElementById("result").innerHTML = "You have clicked the button " + localStorage.hovercount + " time(s).";
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+    }
+}
+      
+      
+      
       // This example takes info from an API for beginners
       // and displays it on this webpage. You are going to see
       // a list of movies created by a Japanese movie making company.
