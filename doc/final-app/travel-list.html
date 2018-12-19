@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries: Travel List</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="travel-style.css">
+    <link rel="stylesheet" href="travel-list-nav.css">
+</head>
+<body>
+    <div class="bg">
+        <nav role="navigation">
+            <div id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+
+                <input type="checkbox"/>
+
+                <ul id="menu">
+                    <li class="menu-option"><a href="index.html">Home</a></li>
+                    <li class="menu-option"><a href="africa.html">Africa</a></li>
+                    <li class="menu-option"><a href="americas.html">Americas</a></li>
+                    <li class="menu-option"><a href="asia.html">Asia</a></li>
+                    <li class="menu-option"><a href="europe.html">Europe</a></li>
+                    <li class="menu-option"><a href="oceania.html">Oceania</a></li>
+                    <li class="menu-option"><a href="#" class="active">Travel List</a></li>
+                </ul>
+            </div>
+        </nav>
+        <h1>Travel List</h1>
+        <p>What countries do you want to travel to the most? Create your own travel list below!</p>
+        <div class="small-container">
+            <form><div id="listInputContainer">
+              <input id="item" type="text" placeholder="Add a country name...">
+            </div></form>
+
+            <h2>Your Travel List</h2>
+            <ul id="travel-list"></ul>
+
+            <button>Clear All</button>
+          </div>
+    </div>
+</body>
+<script src="travel-javascript.js"></script>
+</html>
